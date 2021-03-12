@@ -1,0 +1,21 @@
+@model List<Category>
+<style>
+    .nav-item:hover{
+        border-radius: 5px;
+        background-color: #DF4D49;
+        text-decoration: solid;
+        transition: 0.5s;
+    }
+</style>
+<ul class="navbar-nav mr-auto">
+    @foreach (var c in Model)
+    {
+        @if (ViewBag.SelectedCategory == c.categoryId.ToString())
+            ViewBag.tmp = "active bg-danger rounded";
+        else
+            ViewBag.tmp = "";
+        <li class="nav-item mx-0.7 @ViewBag.tmp">
+            <a href="/news/category/@c.categoryId" class="nav-link">@c.Name</a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,128 @@
+@model List<News>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+        integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
+
+    <title>Haber Sitesi</title>
+
+
+</head>
+
+<style>
+    body {
+        padding-top: 70px;
+    }
+
+    .Id {
+        width: 10px;
+    }
+
+    .td-img {
+        width: 200px;
+        height: 150px;
+    }
+
+    div.row {
+        padding-right: 25px;
+        padding-left: 25px;
+    }
+
+    table.table-bordered {
+        border: 2px solid black;
+        margin-top: 20px;
+    }
+
+    table.table-bordered>thead>tr>th {
+        border: 2px solid black;
+    }
+
+    table.table-bordered>tbody>tr>td {
+        border: 2px solid black;
+    }
+
+    table.table-bordered>tbody>tr>th {
+        border: 2px solid black;
+    }
+
+    i {
+        font-size: 30px;
+    }
+</style>
+
+<body class="bg-dark">
+    @await Html.PartialAsync("_navbar")
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1 style="display: inline;" class="text-white">Tüm Haberler:</h1>
+            <a style="float: right; margin-right: 10px;" href="/admin/createnews" class="btn btn-lg btn-success">HABER
+                EKLE</a>
+            <table class="table table-bordered table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th style="width: 30px;" scope="col">ID</th>
+                        <th style="width: 210px;" scope="col">RESİM</th>
+                        <th style="width: 600px;" scope="col">BAŞLIK</th>
+                        <th style="width: 40px;" scope="col">SEÇİLMİŞ HABER</th>
+                        <th style="width: 70px;" scope="col">TARİH</th>
+                        <th style="width: 100px;" scope="col">EDİTÖR</th>
+                        <th style="width: 200px;" scope="col">KONTROL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var h in Model)
+                    {
+                        <tr>
+                            <th scope="row">@h.haberId</th>
+                            <td><a href="@h.haberResmi">Resmi görüntüle..</a></td>
+                            <td>@h.haberBasligi</td>
+                            <td>
+                                @if (h.isHome)
+                                {
+                                    <i class="fas fa-check-square" style="color: green;"></i>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-times-circle" style="color: red;"></i>
+                                }
+                            </td>
+                            <td>@h.haberTarihi.ToString("dd/MM/yyyy")</td>
+                            <td>@h.haberYazari</td>
+                            <td>
+                                <form style="display: inline;" action="/admin/deletenews" method="POST">
+                                    <input type="hidden" name="Id" value="@h.haberId">
+                                    <button type="submit" class="btn btn-sm btn-danger mr-1">SİL</button>
+                                </form>
+
+                                <a href="/admin/editnews/@h.haberId" class="btn btn-sm btn-primary mr-1">DÜZENLE</a>
+                                <a href="/news/read/@h.haberId" class="btn btn-sm btn-warning">HABERE GİT</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

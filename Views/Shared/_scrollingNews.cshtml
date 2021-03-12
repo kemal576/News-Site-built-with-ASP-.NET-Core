@@ -1,0 +1,29 @@
+@model List<News>
+
+<html>
+<style>
+    marquee {
+        color: white;
+    }
+
+    div {
+        display: inline;
+    }
+</style>
+
+<body>
+
+    <marquee behavior="scroll" direction="left" scrollamount="12" 
+            onmouseover="this.stop();" onmouseout="this.start();">
+        @foreach (var h in Model)
+        {
+            <div>
+                <span>@h.haberTarihi.ToString("dd/MM/yyyy")</span>
+                <a href="/news/read/@h.haberId"> @h.haberBasligi</a>
+                <span>...............//...............</span>
+            </div>
+        }
+    </marquee>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+@model News;
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Open+Sans&display=swap" rel="stylesheet">
+    <title>Haber Oku</title>
+</head>
+<style>
+    body {
+        padding-top: 70px;
+        background-color: ;
+    }
+
+    .baslik {
+        font-family: 'Oswald', sans-serif;
+        font-weight: bold;
+        color: white;
+    }
+
+    .container {
+        padding-top: 20px;
+    }
+
+    .container div {
+        padding-bottom: 15px;
+        color: white;
+    }
+
+    .container p {
+        font-family: 'Lato', sans-serif;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 23px;
+    }
+
+    .jumbotron {
+        background-image: url(@Model.haberResmi);
+        background-position: center 1px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 500px;
+
+    }
+</style>
+
+<body class="bg-dark">
+    @await Html.PartialAsync("_navbar")
+
+    <div class="container">
+        <div class="text-center baslik">
+            <h1>@Model.haberBasligi</h1>
+        </div>
+        <div class="text-center">
+            <img src="@Model.haberResmi" class="rounded" alt="...">
+        </div>
+        <div class="text-center row">
+            <p class="col-md-5">@Model.haberYazari</p>
+            <p class="col-md-5">@Model.haberTarihi</p>
+        </div>
+        <div class="text-center">
+            <p>@Model.haberIcerigi</p>
+        </div>
+    </div>
+</body>
+
+</html>

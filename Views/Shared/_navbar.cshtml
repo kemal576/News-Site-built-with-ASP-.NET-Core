@@ -1,0 +1,31 @@
+<style>
+    .arama {
+        background-color: wheat;
+        color: white;
+        border-color: black;
+
+    }
+
+    .arama:hover {
+        transition: 0.3s;
+        color: white;
+        border-color: white;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="/">HABERLER</a>
+
+        @await Component.InvokeAsync("Categories")
+        <a style="margin-right: 15px" href="/admin/newslist" class="btn btn-danger btn-sm">ADMİN</a>
+        <form action="/news/search" class="form-inline my-2 my-lg-0">
+            <input name="q" class="form-control mr-sm-2" type="search" placeholder="Arama" aria-label="Search">
+            <button class="btn btn-outline-light bg-secondary my-2 my-sm-0 arama" type="submit">Haberlerde Ara</button>
+        </form>
+    </div>
+</nav>
